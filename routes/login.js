@@ -41,10 +41,8 @@ passport.use(new GoogleStrategy({
             return cb(err);
         }
         if (user) {
-            console.log('user found')
             return cb(null, user);
         }
-        console.log('user not found')
         const newUser = new User({
             googleId: profile.id,
             email: profile.emails[0].value,
@@ -79,7 +77,7 @@ router.get("/auth/google",passport.authenticate("google", {
 
 router.get("/auth/google/callback", passport.authenticate("google", {
 		successRedirect: "/",
-		failureRedirect: "/auth/google?error=Invalid+email,+Please+Use+your+Covenant+University+Student+Email",
+		failureRedirect: "/auth/google?error=Access+Denied",
 	})
 );
 

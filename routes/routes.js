@@ -14,7 +14,7 @@ function ensureAuthenticated(req, res, next) {
 
 // define the home page route
 router.get('/', ensureAuthenticated, (req, res) => {
-  res.send('Nothing to see here')
+  res.send('server is running')
 })
 
 // Route for JSON data post

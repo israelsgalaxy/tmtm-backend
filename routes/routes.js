@@ -1,7 +1,7 @@
-const express = require('express')
-const router = express.Router()
-const login = require('./login')
-const Data = require('../models/data')
+const express = require("express");
+const router = express.Router();
+const login = require("./login");
+const Data = require("../models/data");
 
 router.use(login);
 
@@ -13,22 +13,23 @@ function ensureAuthenticated(req, res, next) {
 }
 
 // define the home page route
-router.get('/', ensureAuthenticated, (req, res) => {
-  res.send('server is running')
-})
+router.get("/", ensureAuthenticated, (req, res) => {
+	res.send("server is running");
+	console.log(req.user.email);
+});
 
 // Route for JSON data post
-router.post('/data', ensureAuthenticated, (req, res) => {
+router.post("/data", ensureAuthenticated, (req, res) => {
 	const data = new Data({ data: req.body });
 	data.save((error) => {
 		if (error) {
 			return res.send(error);
 		}
-		res.json({ message: 'Data saved successfully' });
+		res.json({ message: "Data saved successfully" });
 	});
 });
 
-module.exports = router
+module.exports = router;
 
 // sample data
 // {
